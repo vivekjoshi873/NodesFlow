@@ -9,28 +9,32 @@ function DelayNode({ data, selected }: NodeProps<DelayNodeData>) {
   return (
     <div
       className={cn(
-        'relative w-[220px] rounded-xl border border-[#2a2d3e]/80 bg-[#1e2235]/90 shadow-[0_4px_24px_rgba(0,0,0,0.4)]',
-        'border-t-[3px] border-t-[#06b6d4]',
-        selected && 'ring-2 ring-[#06b6d4]/50',
+        'node-card border-t-[3px] border-t-[var(--color-delay)]',
+        selected && 'ring-2 ring-[var(--color-delay)]/50',
         data.isCycleHighlighted && 'cycle-highlight',
-        data.isSimulationActive && 'ring-2 ring-[#06b6d4]',
+        data.isSimulationActive && 'ring-2 ring-[var(--color-delay)]',
       )}
     >
       <Handle
         type="target"
         position={Position.Left}
         style={{ top: '50%' }}
-        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[#06b6d4] !bg-[#1a1d2e]"
+        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[var(--color-delay)] !bg-[var(--bg-app)]"
       />
       <div className="p-3">
         <div className="mb-2 flex items-start justify-between gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#06b6d4]/15">
-            <Clock className="h-3.5 w-3.5 text-[#06b6d4]" />
+          <div
+            className="flex h-7 w-7 items-center justify-center rounded-full"
+            style={{ background: 'var(--color-delay-bg)' }}
+          >
+            <Clock className="h-3.5 w-3.5" style={{ color: 'var(--color-delay)' }} />
           </div>
           <Badge variant="delay">Delay</Badge>
         </div>
-        <div className="text-[13px] font-semibold text-[#e2e8f0]">{data.name}</div>
-        <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-[#94a3b8]">
+        <div className="text-[13px] font-semibold" style={{ color: 'var(--text-primary)' }}>
+          {data.name}
+        </div>
+        <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
           {data.simulationStatus ?? data.summary}
         </p>
       </div>
@@ -39,7 +43,7 @@ function DelayNode({ data, selected }: NodeProps<DelayNodeData>) {
         position={Position.Right}
         id="default"
         style={{ top: '50%' }}
-        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[#06b6d4] !bg-[#06b6d4]"
+        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[var(--color-delay)] !bg-[var(--color-delay)]"
       />
     </div>
   )

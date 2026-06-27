@@ -14,14 +14,29 @@ export function useWorkflowValidation() {
   const { nodes, edges } = useSelector(selectWorkflow)
 
   const validate = useCallback(() => {
-    dispatch(clearCycleHighlights())
-    const result = validateWorkflow(nodes, edges)
-    dispatch(setValidationResult(result))
-    if (result.cycleNodeIds.length > 0) {
-      dispatch(setCycleHighlights(result.cycleNodeIds))
+    try {
+      dispatch(clearCycleHighlights())
+      const result = validateWorkflow(nodes, edges)
+      dispatch(setValidationResult(result))
+      if (result.cycleNodeIds.length > 0) {
+        dispatch(setCycleHighlights(result.cycleNodeIds))
+      }
+      dispatch(setValidationModalOpen(true))
+      return result
+    } catch (error) {
+      console.error('Validation failed:', error)
+      dispatch(
+        setValidationResult({
+          valid: false,
+          errors: ['Validation failed unexpectedly. Check the browser console for details.'],
+          warnings: [],
+          passedChecks: [],
+          cycleNodeIds: [],
+        }),
+      )
+      dispatch(setValidationModalOpen(true))
+      return null
     }
-    dispatch(setValidationModalOpen(true))
-    return result
   }, [dispatch, edges, nodes])
 
   return { validate }

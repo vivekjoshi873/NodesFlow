@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import ReactFlow, {
   Background,
+  BackgroundVariant,
   Controls,
   MiniMap,
   type Connection,
@@ -157,11 +158,9 @@ export default function WorkflowCanvas() {
     <div className="relative h-full w-full">
       {!hasNodes && (
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-          <div className="rounded-xl border border-dashed border-[#2a2d3e] px-8 py-6 text-center">
-            <p className="text-[13px] text-[#94a3b8]">
-              ← Add a node from the sidebar to get started
-            </p>
-          </div>
+          <p className="text-[14px]" style={{ color: 'var(--edge-color)' }}>
+            ← Add a node from the sidebar to get started
+          </p>
         </div>
       )}
 
@@ -170,7 +169,7 @@ export default function WorkflowCanvas() {
           variant="secondary"
           size="sm"
           onClick={handleAutoLayout}
-          className="shadow-lg"
+          className="border border-[var(--border-node)]"
         >
           <LayoutGrid className="h-4 w-4" />
           Auto Layout
@@ -193,16 +192,30 @@ export default function WorkflowCanvas() {
         fitView
         deleteKeyCode={null}
         className="dot-grid"
+        style={{ background: 'var(--bg-canvas)' }}
         defaultEdgeOptions={{ type: 'custom' }}
       >
-        <Background color="#2a2d3e" gap={20} size={1} />
-        <Controls showInteractive={false} position="bottom-left" />
+        <Background
+          variant={BackgroundVariant.Lines}
+          gap={40}
+          size={1}
+          color="var(--canvas-line-color)"
+        />
+        <Controls
+          showInteractive={false}
+          position="bottom-left"
+          style={{
+            background: 'var(--controls-bg)',
+            border: '1px solid var(--border-primary)',
+          }}
+        />
         <MiniMap
           position="bottom-right"
+          style={{ background: 'var(--minimap-bg)' }}
           nodeColor={(node) =>
             NODE_ACCENT_COLORS[getNodeTypeFromNode(node as (typeof nodes)[0])]
           }
-          maskColor="rgba(15, 17, 23, 0.8)"
+          maskColor="var(--minimap-mask)"
         />
       </ReactFlow>
     </div>

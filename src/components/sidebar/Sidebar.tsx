@@ -22,16 +22,25 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="flex h-full w-[260px] shrink-0 flex-col border-r border-[#2a2d3e] bg-[#1a1d2e]">
-      <div className="border-b border-[#2a2d3e] p-4">
-        <h2 className="mb-3 text-[11px] font-medium uppercase tracking-[0.05em] text-[#94a3b8]">
+    <aside
+      className="flex h-full w-[260px] shrink-0 flex-col border-r"
+      style={{ background: 'var(--bg-sidebar)', borderColor: 'var(--border-primary)' }}
+    >
+      <div className="border-b p-4" style={{ borderColor: 'var(--border-primary)' }}>
+        <h2
+          className="mb-3 text-[11px] font-medium uppercase tracking-[0.08em]"
+          style={{ color: 'var(--text-label)' }}
+        >
           Add Nodes
         </h2>
         <NodePalette />
       </div>
 
       <div className="flex min-h-0 flex-1 flex-col p-4">
-        <h2 className="mb-3 text-[11px] font-medium uppercase tracking-[0.05em] text-[#94a3b8]">
+        <h2
+          className="mb-3 text-[11px] font-medium uppercase tracking-[0.08em]"
+          style={{ color: 'var(--text-label)' }}
+        >
           Saved Workflows
         </h2>
         <div className="min-h-0 flex-1 overflow-y-auto">

@@ -158,7 +158,7 @@ const workflowSlice = createSlice({
       state.edges = state.edges.map((edge) => ({
         ...edge,
         animated: false,
-        style: { stroke: '#4b5563', strokeWidth: 2 },
+        style: { stroke: 'var(--edge-color)', strokeWidth: 2 },
       }))
     },
     updateNodeSimulationFlags(
@@ -181,7 +181,7 @@ const workflowSlice = createSlice({
       if (edge) {
         edge.animated = action.payload.animated
         edge.style = {
-          stroke: action.payload.color ?? '#4b5563',
+          stroke: action.payload.color ?? 'var(--edge-color)',
           strokeWidth: 2,
           strokeDasharray: action.payload.animated ? '5 5' : undefined,
         }

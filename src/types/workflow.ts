@@ -92,10 +92,10 @@ export const NODE_TYPE_LABELS: Record<NodeType, string> = {
 }
 
 export const NODE_ACCENT_COLORS: Record<NodeType, string> = {
-  trigger: '#6366f1',
-  decision: '#f59e0b',
-  delay: '#06b6d4',
-  action: '#10b981',
+  trigger: 'var(--color-trigger)',
+  decision: 'var(--color-decision)',
+  delay: 'var(--color-delay)',
+  action: 'var(--color-action)',
 }
 
 export const VALID_CONNECTIONS: Record<NodeType, NodeType[]> = {

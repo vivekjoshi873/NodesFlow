@@ -75,21 +75,24 @@ export default function SavedWorkflowsList({ onDiscardConfirm }: SavedWorkflowsL
 
       <div className="flex flex-col gap-1">
         {workflows.length === 0 && (
-          <p className="py-4 text-center text-[11px] text-[#94a3b8]">No saved workflows yet</p>
+          <p className="py-4 text-center text-[11px]" style={{ color: 'var(--text-secondary)' }}>
+            No saved workflows yet
+          </p>
         )}
         {workflows.map((workflow: SavedWorkflow) => (
           <div
             key={workflow.id}
             className={cn(
-              'flex items-center gap-2 rounded-md border border-transparent px-2 py-2 transition-colors hover:bg-[#13151f]',
-              currentId === workflow.id && 'border-[#6366f1]/30 bg-[#13151f] border-l-2 border-l-[#6366f1]',
+              'flex items-center gap-2 rounded-md border border-transparent px-2 py-2 transition-colors hover:bg-[var(--bg-node)]',
+              currentId === workflow.id &&
+                'border-l-2 border-l-[var(--color-trigger)] bg-[var(--bg-node)] border-[color-mix(in_srgb,var(--color-trigger)_30%,transparent)]',
             )}
           >
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[13px] font-medium text-[#e2e8f0]">
+              <div className="truncate text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                 {workflow.name}
               </div>
-              <div className="text-[10px] text-[#94a3b8]">
+              <div className="text-[10px]" style={{ color: 'var(--text-secondary)' }}>
                 {formatRelativeTime(workflow.savedAt)}
               </div>
             </div>

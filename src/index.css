@@ -1,25 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+:root[data-theme="dark"] {
+  --bg-app: #16161a;
+  --bg-canvas: #111010;
+  --bg-sidebar: #16161a;
+  --bg-panel: #16161a;
+  --bg-node: #1e1e24;
+  --bg-node-hover: #25252c;
+
+  --border-primary: #2a2a30;
+  --border-node: rgba(255, 255, 255, 0.06);
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #4b5563;
+  --text-label: #6b7280;
+
+  --shadow-node: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-panel: -4px 0 24px rgba(0, 0, 0, 0.3);
+
+  --edge-color: #3a3a42;
+  --canvas-line-color: rgba(255, 255, 255, 0.03);
+
+  --color-trigger: #7c6af7;
+  --color-trigger-bg: rgba(124, 106, 247, 0.12);
+  --color-decision: #e8a030;
+  --color-decision-bg: rgba(232, 160, 48, 0.12);
+  --color-delay: #2eb8c7;
+  --color-delay-bg: rgba(46, 184, 199, 0.12);
+  --color-action: #3ecf7a;
+  --color-action-bg: rgba(62, 207, 122, 0.12);
+
+  --minimap-bg: #16161a;
+  --minimap-mask: rgba(17, 16, 16, 0.7);
+  --controls-bg: #1e1e24;
+  --scrollbar-thumb: #2a2a30;
+
+  --color-background: var(--bg-app);
+  --color-canvas: var(--bg-canvas);
+  --color-sidebar: var(--bg-sidebar);
+  --color-sidebar-border: var(--border-primary);
+  --color-node: var(--bg-node);
+  --color-node-border: var(--border-primary);
+  --color-edge: var(--edge-color);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+}
+
+:root[data-theme="light"] {
+  --bg-app: #f5f5f7;
+  --bg-canvas: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-node: #ffffff;
+  --bg-node-hover: #f9f9fb;
+
+  --border-primary: #e2e2e8;
+  --border-node: rgba(0, 0, 0, 0.08);
+
+  --text-primary: #111010;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --text-label: #6b7280;
+
+  --shadow-node: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-panel: -4px 0 24px rgba(0, 0, 0, 0.08);
+
+  --edge-color: #c7c7d0;
+  --canvas-line-color: rgba(0, 0, 0, 0.04);
+
+  --color-trigger: #6558e8;
+  --color-trigger-bg: rgba(101, 88, 232, 0.08);
+  --color-decision: #c47d10;
+  --color-decision-bg: rgba(196, 125, 16, 0.08);
+  --color-delay: #0e9aaa;
+  --color-delay-bg: rgba(14, 154, 170, 0.08);
+  --color-action: #18a057;
+  --color-action-bg: rgba(24, 160, 87, 0.08);
+
+  --minimap-bg: #f5f5f7;
+  --minimap-mask: rgba(245, 245, 247, 0.7);
+  --controls-bg: #ffffff;
+  --scrollbar-thumb: #e2e2e8;
+
+  --color-background: var(--bg-app);
+  --color-canvas: var(--bg-canvas);
+  --color-sidebar: var(--bg-sidebar);
+  --color-sidebar-border: var(--border-primary);
+  --color-node: var(--bg-node);
+  --color-node-border: var(--border-primary);
+  --color-edge: var(--edge-color);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+}
+
 @theme {
-  --color-background: #0f1117;
-  --color-canvas: #13151f;
-  --color-sidebar: #1a1d2e;
-  --color-sidebar-border: #2a2d3e;
-  --color-node: #1e2235;
-  --color-node-border: #2a2d3e;
-  --color-trigger: #6366f1;
-  --color-decision: #f59e0b;
-  --color-delay: #06b6d4;
-  --color-action: #10b981;
-  --color-edge: #4b5563;
-  --color-text-primary: #e2e8f0;
-  --color-text-secondary: #94a3b8;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
 }
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
 }
 
 html,
@@ -31,41 +126,38 @@ body,
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: 'DM Sans', sans-serif;
   font-size: 13px;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
-.dot-grid {
-  background-color: var(--color-canvas);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='1' cy='1' r='1' fill='%232a2d3e'/%3E%3C/svg%3E");
+code,
+input[data-mono],
+.node-value,
+.param-key,
+.param-value {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-  }
+.dot-grid {
+  background-color: var(--bg-canvas);
 }
 
 .simulation-active {
-  animation: pulse-ring 1.5s ease-out infinite;
+  box-shadow:
+    var(--shadow-node),
+    0 0 0 2px rgba(124, 106, 247, 0.45);
 }
 
 @keyframes flash-green {
   0%,
   100% {
-    background-color: rgba(16, 185, 129, 0.1);
+    background-color: var(--color-action-bg);
   }
   50% {
-    background-color: rgba(16, 185, 129, 0.35);
+    background-color: rgba(62, 207, 122, 0.35);
   }
 }
 
@@ -96,29 +188,49 @@ body {
 }
 
 .react-flow__minimap {
-  background-color: #1a1d2e !important;
-  border: 1px solid #2a2d3e !important;
+  background-color: var(--minimap-bg) !important;
+  border: 1px solid var(--border-primary) !important;
   border-radius: 8px !important;
 }
 
 .react-flow__controls {
-  background-color: #1a1d2e !important;
-  border: 1px solid #2a2d3e !important;
+  background-color: var(--controls-bg) !important;
+  border: 1px solid var(--border-primary) !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: var(--shadow-node) !important;
 }
 
 .react-flow__controls-button {
-  background-color: #1a1d2e !important;
-  border-bottom: 1px solid #2a2d3e !important;
-  fill: #e2e8f0 !important;
+  background-color: var(--controls-bg) !important;
+  border-bottom: 1px solid var(--border-primary) !important;
+  fill: var(--text-primary) !important;
 }
 
 .react-flow__controls-button:hover {
-  background-color: #2a2d3e !important;
+  background-color: var(--bg-node-hover) !important;
 }
 
 .cycle-highlight {
   outline: 2px solid #ef4444 !important;
   outline-offset: 2px;
+}
+
+.node-card {
+  position: relative;
+  width: 220px;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--border-primary) 80%, transparent);
+  background: var(--bg-node);
+  box-shadow: var(--shadow-node);
+}
+
+.palette-item {
+  border: 1px solid var(--border-primary);
+  background: var(--bg-node);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.palette-item:hover {
+  border-color: var(--edge-color);
+  background: var(--bg-node-hover);
 }

@@ -25,11 +25,11 @@ const icons = {
   action: Play,
 }
 
-const accentClasses = {
-  trigger: 'text-[#6366f1]',
-  decision: 'text-[#f59e0b]',
-  delay: 'text-[#06b6d4]',
-  action: 'text-[#10b981]',
+const accentColorVars: Record<NodeType, string> = {
+  trigger: '--color-trigger',
+  decision: '--color-decision',
+  delay: '--color-delay',
+  action: '--color-action',
 }
 
 export default function NodeConfigPanel() {
@@ -45,17 +45,23 @@ export default function NodeConfigPanel() {
   return (
     <aside
       className={cn(
-        'flex h-full w-[320px] shrink-0 flex-col border-l border-[#2a2d3e] bg-[#1a1d2e]',
-        'transition-transform duration-300 ease-out',
+        'flex h-full w-[320px] shrink-0 flex-col border-l transition-transform duration-300 ease-out',
       )}
+      style={{ background: 'var(--bg-panel)', borderColor: 'var(--border-primary)' }}
     >
-      <div className="flex items-center gap-3 border-b border-[#2a2d3e] px-4 py-3">
-        <Icon className={cn('h-5 w-5', accentClasses[nodeType])} />
+      <div
+        className="flex items-center gap-3 border-b px-4 py-3"
+        style={{ borderColor: 'var(--border-primary)' }}
+      >
+        <Icon className="h-5 w-5" style={{ color: `var(${accentColorVars[nodeType]})` }} />
         <div className="min-w-0 flex-1">
-          <div className="text-[11px] font-medium uppercase tracking-[0.05em] text-[#94a3b8]">
+          <div
+            className="text-[11px] font-medium uppercase tracking-[0.08em]"
+            style={{ color: 'var(--text-label)' }}
+          >
             {NODE_TYPE_LABELS[nodeType]}
           </div>
-          <div className="truncate text-[13px] font-semibold text-[#e2e8f0]">
+          <div className="truncate text-[13px] font-semibold" style={{ color: 'var(--text-primary)' }}>
             {node.data.name}
           </div>
         </div>
@@ -84,7 +90,7 @@ export default function NodeConfigPanel() {
         )}
       </div>
 
-      <div className="border-t border-[#2a2d3e] p-4">
+      <div className="border-t p-4" style={{ borderColor: 'var(--border-primary)' }}>
         <Button
           variant="destructive"
           className="w-full"

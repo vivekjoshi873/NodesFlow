@@ -104,6 +104,6 @@ export function enrichEdge(edge: WorkflowEdge): WorkflowEdge {
     type: 'custom',
     label,
     animated: false,
-    style: { stroke: '#4b5563', strokeWidth: 2 },
+    style: { stroke: 'var(--edge-color)', strokeWidth: 2 },
   }
 }

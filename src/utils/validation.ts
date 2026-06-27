@@ -1,6 +1,6 @@
 import type { WorkflowEdge, WorkflowNode, ValidationResult } from '@/types/workflow'
 import { NODE_TYPE_LABELS } from '@/types/workflow'
-import { buildNodeSummary, getNodeTypeFromNode } from './nodeDefaults'
+import { getNodeTypeFromNode } from './nodeDefaults'
 
 function getAdjacency(nodes: WorkflowNode[], edges: WorkflowEdge[]): Map<string, string[]> {
   const adj = new Map<string, string[]>()
@@ -176,10 +176,6 @@ export function validateWorkflow(
     errors.push(
       `Incomplete configuration: ${incompleteConfig.map((n) => `${NODE_TYPE_LABELS[getNodeTypeFromNode(n)]} "${n.data.name}"`).join(', ')}`,
     )
-  }
-
-  for (const node of nodes) {
-    node.data.summary = buildNodeSummary(node.data)
   }
 
   return {

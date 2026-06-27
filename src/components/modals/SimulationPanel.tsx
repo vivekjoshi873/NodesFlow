@@ -7,11 +7,17 @@ export default function SimulationPanel() {
   if (!simulationState.active && !simulationState.completed) return null
 
   return (
-    <div className="absolute bottom-20 left-1/2 z-30 -translate-x-1/2 rounded-lg border border-[#2a2d3e] bg-[#1a1d2e]/95 px-4 py-2 shadow-lg backdrop-blur-sm">
-      <p className="text-[11px] font-medium uppercase tracking-[0.05em] text-[#94a3b8]">
+    <div
+      className="absolute bottom-20 left-1/2 z-30 -translate-x-1/2 rounded-lg border px-4 py-2"
+      style={{ background: 'var(--bg-app)', borderColor: 'var(--border-primary)' }}
+    >
+      <p
+        className="text-[11px] font-medium uppercase tracking-[0.05em]"
+        style={{ color: 'var(--text-secondary)' }}
+      >
         Simulation
       </p>
-      <p className="text-[13px] text-[#e2e8f0]">
+      <p className="text-[13px]" style={{ color: 'var(--text-primary)' }}>
         {simulationState.active
           ? 'Running workflow…'
           : simulationState.pathLabels.join(' → ')}

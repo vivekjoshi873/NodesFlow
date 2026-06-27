@@ -26,7 +26,7 @@ export default function TriggerConfig({ nodeId, data }: TriggerConfigProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-[12px] text-[#94a3b8]">
+      <p className="text-[12px]" style={{ color: 'var(--text-secondary)' }}>
         This is the starting point of your workflow
       </p>
       <div className="space-y-2">

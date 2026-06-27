@@ -5,6 +5,12 @@ import { store } from '@/store'
 import App from '@/App'
 import './index.css'
 
+const savedTheme = localStorage.getItem('flowforge_theme')
+document.documentElement.setAttribute(
+  'data-theme',
+  savedTheme === 'light' ? 'light' : 'dark',
+)
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>

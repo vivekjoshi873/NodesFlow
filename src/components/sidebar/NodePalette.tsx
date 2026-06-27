@@ -6,47 +6,46 @@ import { useSelector } from 'react-redux'
 import { createNode } from '@/utils/nodeDefaults'
 import type { NodeType } from '@/types/workflow'
 import { Zap, GitBranch, Clock, Play } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 const paletteItems: {
   type: NodeType
   label: string
   description: string
   icon: typeof Zap
-  color: string
-  bg: string
+  colorVar: string
+  bgVar: string
 }[] = [
   {
     type: 'trigger',
     label: 'Trigger',
     description: 'Start your workflow',
     icon: Zap,
-    color: 'text-[#6366f1]',
-    bg: 'bg-[#6366f1]/15',
+    colorVar: '--color-trigger',
+    bgVar: '--color-trigger-bg',
   },
   {
     type: 'decision',
     label: 'Decision',
     description: 'Branch on conditions',
     icon: GitBranch,
-    color: 'text-[#f59e0b]',
-    bg: 'bg-[#f59e0b]/15',
+    colorVar: '--color-decision',
+    bgVar: '--color-decision-bg',
   },
   {
     type: 'delay',
     label: 'Delay',
     description: 'Wait before continuing',
     icon: Clock,
-    color: 'text-[#06b6d4]',
-    bg: 'bg-[#06b6d4]/15',
+    colorVar: '--color-delay',
+    bgVar: '--color-delay-bg',
   },
   {
     type: 'action',
     label: 'Action',
     description: 'Execute a task',
     icon: Play,
-    color: 'text-[#10b981]',
-    bg: 'bg-[#10b981]/15',
+    colorVar: '--color-action',
+    bgVar: '--color-action-bg',
   },
 ]
 
@@ -71,20 +70,20 @@ export default function NodePalette() {
             key={item.type}
             type="button"
             onClick={() => handleAdd(item.type)}
-            className={cn(
-              'rounded-lg border border-[#2a2d3e] bg-[#13151f] p-3 text-left transition-colors hover:border-[#3a3d4e] hover:bg-[#1e2235] cursor-pointer',
-            )}
+            className="palette-item cursor-pointer rounded-lg p-3 text-left"
           >
             <div
-              className={cn(
-                'mb-2 flex h-8 w-8 items-center justify-center rounded-full',
-                item.bg,
-              )}
+              className="mb-2 flex h-8 w-8 items-center justify-center rounded-full"
+              style={{ background: `var(${item.bgVar})` }}
             >
-              <Icon className={cn('h-4 w-4', item.color)} />
+              <Icon className="h-4 w-4" style={{ color: `var(${item.colorVar})` }} />
             </div>
-            <div className="text-[13px] font-semibold text-[#e2e8f0]">{item.label}</div>
-            <div className="mt-0.5 text-[11px] text-[#94a3b8]">{item.description}</div>
+            <div className="text-[13px] font-semibold" style={{ color: 'var(--text-primary)' }}>
+              {item.label}
+            </div>
+            <div className="mt-0.5 text-[11px]" style={{ color: 'var(--text-secondary)' }}>
+              {item.description}
+            </div>
           </button>
         )
       })}

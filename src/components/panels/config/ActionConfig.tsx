@@ -71,7 +71,7 @@ export default function ActionConfig({ nodeId, data }: ActionConfigProps) {
         </div>
         <div className="space-y-2">
           {data.parameters.length === 0 && (
-            <p className="text-[11px] text-[#94a3b8]">No parameters added</p>
+            <p className="text-[11px]" style={{ color: 'var(--text-secondary)' }}>No parameters added</p>
           )}
           {data.parameters.map((param, index) => (
             <div key={`param-${index}`} className="flex gap-2">
@@ -79,13 +79,15 @@ export default function ActionConfig({ nodeId, data }: ActionConfigProps) {
                 value={param.key}
                 onChange={(e) => updateParameter(index, 'key', e.target.value)}
                 placeholder="Key"
-                className="flex-1"
+                className="param-key flex-1"
+                data-mono
               />
               <Input
                 value={param.value}
                 onChange={(e) => updateParameter(index, 'value', e.target.value)}
                 placeholder="Value"
-                className="flex-1"
+                className="param-value flex-1"
+                data-mono
               />
               <Button
                 type="button"

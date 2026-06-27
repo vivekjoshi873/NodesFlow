@@ -4,6 +4,7 @@ import type { WorkflowNode } from '@/types/workflow'
 
 export const selectWorkflow = (state: RootState) => state.workflow
 export const selectUi = (state: RootState) => state.ui
+export const selectTheme = (state: RootState) => state.ui.theme
 export const selectSavedWorkflows = (state: RootState) => state.savedWorkflows.workflows
 
 export const selectSelectedNode = createSelector(

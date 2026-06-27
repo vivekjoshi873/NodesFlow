@@ -22,11 +22,11 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border border-[#2a2d3e] bg-[#1a1d2e] p-4 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none',
+  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border border-[var(--border-primary)] bg-[var(--bg-app)] p-4 pr-8 shadow-[var(--shadow-node)] transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none',
   {
     variants: {
       variant: {
-        default: 'text-[#e2e8f0]',
+        default: 'text-[var(--text-primary)]',
         destructive: 'border-red-900/50 text-red-200',
       },
     },
@@ -58,7 +58,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-[#2a2d3e] bg-transparent px-3 text-sm font-medium transition-colors hover:bg-[#2a2d3e] focus:outline-none focus:ring-2 focus:ring-indigo-500',
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-[var(--border-primary)] bg-transparent px-3 text-sm font-medium transition-colors hover:bg-[var(--bg-node-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-trigger)]/50',
       className,
     )}
     {...props}
@@ -73,7 +73,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'absolute right-2 top-2 rounded-md p-1 text-[#94a3b8] opacity-0 transition-opacity hover:text-[#e2e8f0] focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100',
+      'absolute right-2 top-2 rounded-md p-1 text-[var(--text-secondary)] opacity-0 transition-opacity hover:text-[var(--text-primary)] focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100',
       className,
     )}
     toast-close=""

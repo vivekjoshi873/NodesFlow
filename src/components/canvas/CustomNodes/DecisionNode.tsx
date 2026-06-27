@@ -18,18 +18,17 @@ function DecisionNode({ id, data, selected }: NodeProps<DecisionNodeData>) {
   return (
     <div
       className={cn(
-        'relative w-[220px] overflow-visible rounded-xl border border-[#2a2d3e]/80 bg-[#1e2235]/90 shadow-[0_4px_24px_rgba(0,0,0,0.4)]',
-        'border-t-[3px] border-t-[#f59e0b]',
-        selected && 'ring-2 ring-[#f59e0b]/50',
+        'node-card overflow-visible border-t-[3px] border-t-[var(--color-decision)]',
+        selected && 'ring-2 ring-[var(--color-decision)]/50',
         data.isCycleHighlighted && 'cycle-highlight',
-        data.isSimulationActive && 'ring-2 ring-[#f59e0b]',
+        data.isSimulationActive && 'ring-2 ring-[var(--color-decision)]',
       )}
     >
       <Handle
         type="target"
         position={Position.Left}
         style={{ top: '50%' }}
-        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[#f59e0b] !bg-[#1a1d2e]"
+        className="!h-3 !w-3 !-translate-y-1/2 !border-2 !border-[var(--color-decision)] !bg-[var(--bg-app)]"
       />
 
       <Handle
@@ -64,19 +63,30 @@ function DecisionNode({ id, data, selected }: NodeProps<DecisionNodeData>) {
 
       <div className="p-3 pr-10">
         <div className="mb-2 flex items-start justify-between gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f59e0b]/15">
-            <GitBranch className="h-3.5 w-3.5 text-[#f59e0b]" />
+          <div
+            className="flex h-7 w-7 items-center justify-center rounded-full"
+            style={{ background: 'var(--color-decision-bg)' }}
+          >
+            <GitBranch className="h-3.5 w-3.5" style={{ color: 'var(--color-decision)' }} />
           </div>
           <Badge variant="decision">Decision</Badge>
         </div>
-        <div className="text-[13px] font-semibold text-[#e2e8f0]">{data.name}</div>
-        <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-[#94a3b8]">
+        <div className="text-[13px] font-semibold" style={{ color: 'var(--text-primary)' }}>
+          {data.name}
+        </div>
+        <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
           {data.simulationStatus ?? data.summary}
         </p>
 
         {data.showDecisionPrompt && simulationCtx && (
-          <div className="mt-2 rounded-md border border-[#f59e0b]/30 bg-[#13151f] p-2">
-            <p className="mb-1 text-[10px] text-[#fcd34d]">
+          <div
+            className="mt-2 rounded-md border p-2"
+            style={{
+              borderColor: 'color-mix(in srgb, var(--color-decision) 30%, transparent)',
+              background: 'var(--bg-node)',
+            }}
+          >
+            <p className="mb-1 text-[10px]" style={{ color: 'var(--color-decision)' }}>
               Test value for {data.field || 'field'}:
             </p>
             <div className="flex gap-1">
@@ -85,6 +95,7 @@ function DecisionNode({ id, data, selected }: NodeProps<DecisionNodeData>) {
                 onChange={(e) => setTestValue(e.target.value)}
                 className="h-7 text-[11px]"
                 placeholder="Enter value"
+                data-mono
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') simulationCtx.submitDecision(id, testValue)
                 }}

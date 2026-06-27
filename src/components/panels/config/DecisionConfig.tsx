@@ -56,6 +56,7 @@ export default function DecisionConfig({ nodeId, data }: DecisionConfigProps) {
           value={data.field}
           onChange={(e) => update({ field: e.target.value })}
           placeholder="e.g. user.age"
+          data-mono
         />
       </div>
       <div className="space-y-2">
@@ -82,9 +83,13 @@ export default function DecisionConfig({ nodeId, data }: DecisionConfigProps) {
           id="decision-value"
           value={data.value}
           onChange={(e) => update({ value: e.target.value })}
+          data-mono
         />
       </div>
-      <p className="rounded-md bg-[#13151f] p-3 text-[12px] text-[#94a3b8]">
+      <p
+        className="rounded-md p-3 text-[12px]"
+        style={{ background: 'var(--bg-node)', color: 'var(--text-secondary)' }}
+      >
         Connect the TRUE and FALSE output handles to different paths
       </p>
     </div>

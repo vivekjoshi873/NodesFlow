@@ -13,6 +13,7 @@ interface UiState {
   simulationRunning: boolean
   validationModalOpen: boolean
   deleteNodeDialog: DeleteNodeDialogState
+  theme: 'dark' | 'light'
 }
 
 const initialDeleteNodeDialog: DeleteNodeDialogState = {
@@ -28,6 +29,7 @@ const initialState: UiState = {
   simulationRunning: false,
   validationModalOpen: false,
   deleteNodeDialog: initialDeleteNodeDialog,
+  theme: 'dark',
 }
 
 const uiSlice = createSlice({
@@ -64,6 +66,12 @@ const uiSlice = createSlice({
     closeDeleteNodeDialog(state) {
       state.deleteNodeDialog = initialDeleteNodeDialog
     },
+    toggleTheme(state) {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark'
+    },
+    setTheme(state, action: PayloadAction<'dark' | 'light'>) {
+      state.theme = action.payload
+    },
   },
 })
 
@@ -74,6 +82,8 @@ export const {
   setValidationModalOpen,
   openDeleteNodeDialog,
   closeDeleteNodeDialog,
+  toggleTheme,
+  setTheme,
 } = uiSlice.actions
 
 export default uiSlice.reducer

@@ -9,11 +9,14 @@ import {
   Download,
   Upload,
   RotateCcw,
+  Sun,
+  Moon,
 } from 'lucide-react'
 import { setWorkflowName, markSaved, loadWorkflow } from '@/store/slices/workflowSlice'
 import { saveWorkflow } from '@/store/slices/savedWorkflowsSlice'
 import {
   selectCanSimulate,
+  selectTheme,
   selectWorkflow,
 } from '@/store/selectors'
 import { useWorkflowValidation } from '@/hooks/useWorkflowValidation'
@@ -24,11 +27,13 @@ import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { toggleTheme } from '@/store/slices/uiSlice'
 
 export default function Toolbar() {
   const dispatch = useDispatch()
   const { name, id, nodes, edges, simulationState } = useSelector(selectWorkflow)
   const canSimulate = useSelector(selectCanSimulate)
+  const theme = useSelector(selectTheme)
   const { hasUnsavedChanges } = useUnsavedChanges()
   const { validate } = useWorkflowValidation()
   const { runSimulation, resetSimulation } = useSimulation()
@@ -85,10 +90,18 @@ export default function Toolbar() {
   }
 
   return (
-    <header className="flex h-12 shrink-0 items-center border-b border-[#2a2d3e] bg-[#1a1d2e] px-4">
+    <header
+      className="flex h-12 shrink-0 items-center border-b px-4"
+      style={{
+        background: 'var(--bg-app)',
+        borderColor: 'var(--border-primary)',
+      }}
+    >
       <div className="flex items-center gap-2">
-        <Zap className="h-4 w-4 text-[#6366f1]" />
-        <span className="text-[14px] font-semibold text-[#e2e8f0]">FlowForge</span>
+        <Zap className="h-4 w-4" style={{ color: 'var(--color-trigger)' }} />
+        <span className="text-[14px] font-semibold" style={{ color: 'var(--text-primary)' }}>
+          FlowForge
+        </span>
       </div>
 
       <div className="flex flex-1 items-center justify-center gap-2">
@@ -105,14 +118,39 @@ export default function Toolbar() {
           <button
             type="button"
             onClick={() => setEditingName(true)}
-            className="flex items-center gap-2 text-[13px] font-medium text-[#e2e8f0] hover:text-white"
+            className="flex items-center gap-2 text-[13px] font-medium"
+            style={{ color: 'var(--text-primary)' }}
           >
             {hasUnsavedChanges && (
-              <span className="h-2 w-2 rounded-full bg-[#f59e0b]" title="Unsaved changes" />
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ background: 'var(--color-decision)' }}
+                title="Unsaved changes"
+              />
             )}
             {name}
           </button>
         )}
+
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          style={{
+            background: 'var(--bg-node)',
+            border: '1px solid var(--border-primary)',
+            borderRadius: '6px',
+            padding: '6px 8px',
+            cursor: 'pointer',
+            color: 'var(--text-secondary)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '13px',
+            fontFamily: 'DM Sans, sans-serif',
+          }}
+        >
+          {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+          {theme === 'dark' ? 'Light' : 'Dark'}
+        </button>
       </div>
 
       <div className="flex items-center gap-2">

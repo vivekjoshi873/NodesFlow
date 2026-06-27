@@ -43,8 +43,8 @@ function CustomEdge({
     (selected || animated ? NODE_ACCENT_COLORS[data?.sourceType as NodeType] : undefined)
 
   const strokeColor = hovered
-    ? '#ffffff'
-    : accentColor ?? (style.stroke as string) ?? '#4b5563'
+    ? 'var(--text-primary)'
+    : accentColor ?? (style.stroke as string) ?? 'var(--edge-color)'
 
   return (
     <>
@@ -80,7 +80,10 @@ function CustomEdge({
           onMouseLeave={() => setHovered(false)}
         >
           {label && (
-            <span className="rounded bg-[#1a1d2e] px-1.5 py-0.5 text-[9px] font-semibold text-[#94a3b8]">
+            <span
+              className="rounded px-1.5 py-0.5 text-[9px] font-semibold"
+              style={{ background: 'var(--bg-app)', color: 'var(--text-secondary)' }}
+            >
               {label}
             </span>
           )}
@@ -88,7 +91,7 @@ function CustomEdge({
             <button
               type="button"
               onClick={() => dispatch(removeEdge(id))}
-              className="flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-white shadow hover:bg-red-500"
+              className="flex h-5 w-5 items-center justify-center rounded-md bg-red-600 text-white hover:bg-red-500"
               aria-label="Delete edge"
             >
               <X className="h-3 w-3" />

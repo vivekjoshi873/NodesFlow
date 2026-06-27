@@ -55,6 +55,7 @@ export default function DelayConfig({ nodeId, data }: DelayConfigProps) {
           min={1}
           value={data.duration}
           onChange={(e) => update({ duration: Math.max(1, Number(e.target.value) || 1) })}
+          data-mono
         />
       </div>
       <div className="space-y-2">
